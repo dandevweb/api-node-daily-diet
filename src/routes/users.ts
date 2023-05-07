@@ -1,5 +1,10 @@
-import { app } from '../app'
+import { FastifyInstance } from 'fastify'
+import knex from 'knex'
 
-app.get('/', async () => {
-  return 'hello world'
-})
+export async function usersRoutes(app: FastifyInstance) {
+  app.get('/', async () => {
+    const users = await knex('users').select()
+
+    return { users }
+  })
+}
